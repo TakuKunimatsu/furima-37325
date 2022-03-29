@@ -64,12 +64,12 @@ RSpec.describe OrderShippingAddress, type: :model do
       it 'phone_numberが9桁以下だと保存できないこと' do
         @order_shipping_address.phone_number = '111111111'
         @order_shipping_address.valid?
-        expect(@order_shipping_address.errors.full_messages).to include("Phone number is too short (minimum is 10 characters)")
+        expect(@order_shipping_address.errors.full_messages).to include('Phone number is too short (minimum is 10 characters)')
       end
       it 'phone_numberに数字以外が含まれると保存できないこと' do
         @order_shipping_address.phone_number = 'aaaaaaaaaa'
         @order_shipping_address.valid?
-        expect(@order_shipping_address.errors.full_messages).to include("Phone number is invalid")
+        expect(@order_shipping_address.errors.full_messages).to include('Phone number is invalid')
       end
       it 'userが紐付いていないと保存できないこと' do
         @order_shipping_address.user_id = nil
