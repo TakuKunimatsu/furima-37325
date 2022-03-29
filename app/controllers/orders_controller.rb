@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   before_action :authenticate_user!
-  before_action :move_to_index
   before_action :set_item
+  before_action :move_to_index
 
   def index
     @order_shipping_address = OrderShippingAddress.new
@@ -36,7 +36,6 @@ class OrdersController < ApplicationController
   end
 
   def move_to_index
-    set_item
     redirect_to controller: :items, action: :index if @item.user.id == current_user.id || @item.order.present?
   end
 
