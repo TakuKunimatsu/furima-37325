@@ -61,21 +61,31 @@ RSpec.describe OrderShippingAddress, type: :model do
         @order_shipping_address.valid?
         expect(@order_shipping_address.errors.full_messages).to include("Phone number can't be blank")
       end
+
       it 'phone_numberが9桁以下だと保存できないこと' do
         @order_shipping_address.phone_number = '111111111'
         @order_shipping_address.valid?
         expect(@order_shipping_address.errors.full_messages).to include('Phone number is too short (minimum is 10 characters)')
       end
+
+      it 'phone_numberが12桁以上だと保存できないこと' do
+        @order_shipping_address.phone_number = '111111111111'
+        @order_shipping_address.valid?
+        expect(@order_shipping_address.errors.full_messages).to include('Phone number is too long (maximum is 11 characters)')
+      end
+
       it 'phone_numberに数字以外が含まれると保存できないこと' do
         @order_shipping_address.phone_number = 'aaaaaaaaaa'
         @order_shipping_address.valid?
         expect(@order_shipping_address.errors.full_messages).to include('Phone number is invalid')
       end
+
       it 'userが紐付いていないと保存できないこと' do
         @order_shipping_address.user_id = nil
         @order_shipping_address.valid?
         expect(@order_shipping_address.errors.full_messages).to include("User can't be blank")
       end
+
       it 'itemが紐付いていないと保存できないこと' do
         @order_shipping_address.item_id = nil
         @order_shipping_address.valid?
