@@ -36,7 +36,7 @@ class OrdersController < ApplicationController
   end
 
   def move_to_index
-    redirect_to controller: :items, action: :index if @item.user.id == current_user.id || @item.order.present?
+    redirect_to controller: :items, action: :index if @item.user.id != current_user.id || @item.order.present?
   end
 
   def set_item
